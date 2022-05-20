@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
-use App\Http\Requests\ProductGalleryRequest;
-use App\Models\Product;
-use App\Models\ProductGallery;
+use App\Models\Category;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-class ProductGalleryController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,9 +27,9 @@ class ProductGalleryController extends Controller
      */
     public function index()
     {
-        $items = ProductGallery::with('product')->get();
+        $items = Category::all();
 
-        return view ('pages.product-galleries.index')->with([
+        return view ('pages.category.index')->with([
             'items' => $items
         ]);
     }
@@ -40,11 +41,7 @@ class ProductGalleryController extends Controller
      */
     public function create()
     {
-        $products = Product::all();
-
-        return view ('pages.product-galleries.create')->with([
-            'products' => $products
-        ]);
+        return view ('pages.category.create');
     }
 
     /**
@@ -53,24 +50,27 @@ class ProductGalleryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductGalleryRequest $request)
+    public function store(CategoryRequest $request)
     {
         $data = $request->all();
-        $data['photo'] = $request->file('photo')->store(
-            'assets/product', 'public'
+
+        $data['slug'] = Str::slug($request->name);
+        $data ['image'] = $request->file('image')->store(
+            'assets/category', 'public'
         );
 
-        ProductGallery::create($data);
-        return redirect()->route('product-galleries.index');
+        Category::create($data);
+
+        return redirect()->route('category.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
         //
     }
@@ -78,10 +78,10 @@ class ProductGalleryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
         //
     }
@@ -90,10 +90,10 @@ class ProductGalleryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -101,14 +101,14 @@ class ProductGalleryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        $item = ProductGallery::findOrFail($id);
+        $item = Category::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('product-galleries.index');
+        return redirect()->route('category.index');
     }
 }

@@ -1,3 +1,5 @@
+
+
  <!-- Scripts -->
  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
@@ -34,6 +36,8 @@
             } );
 </script>
 
+
+
 <script>
     jQuery(document).ready(function($){
         $('#mymodal').on('show.bs.modal', function(e){
@@ -43,6 +47,17 @@
             modal.find('.modal-body').load(button.data("remote"));
             modal.find('.modal-title').html(button.data("title"));
         });
+    });
+</script>
+
+<script type="text/javascript">
+    $('#name').change(function(e){
+        $.get('{{ route('products.checkSlug') }}',
+        { 'name': $(this).val() },
+        function( data ) {
+            $('#slug').val(data.slug);
+        }
+        );
     });
 </script>
 
@@ -61,3 +76,6 @@
         </div>
     </div>
 </div>
+
+
+

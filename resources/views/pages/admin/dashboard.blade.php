@@ -18,7 +18,7 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text">Rp. <span class="count">{{ $income }}</span></div>
+                                {{-- <div class="stat-text">Rp. <span class="count">{{ $income }}</span></div> --}}
                                 <div class="stat-heading">Penghasilan</div>
                             </div>
                         </div>
@@ -76,9 +76,9 @@
                                   <td>{{ $item->name }}</td>
                                   <td>{{ $item->email }}</td>
                                   <td>{{ $item->number }}</td>
-                                  <td>${{ $item->transaction_total }}</td>
+                                  <td></td>
                                   <td>
-                                    @if($item->transaction_status == 'PENDING')
+                                    {{-- @if($item->transaction_status == 'PENDING')
                                       <span class="badge badge-info">
                                     @elseif($item->transaction_status == 'SUCCESS')
                                       <span class="badge badge-success">
@@ -87,7 +87,7 @@
                                     @else
                                       <span>
                                     @endif
-                                      {{ $item->transaction_status }}
+                                      {{ $item->transaction_status }} --}}
                                       </span>
                                   </td>
                                 </tr>
@@ -128,7 +128,7 @@
 
 @push('after-script')
     <!--Local Stuff-->
-    <script>
+    {{-- <script>
         jQuery(document).ready(function($) {
             "use strict";
 
@@ -318,5 +318,5 @@
             });
             // Bar Chart #flotBarChart End
         });
-    </script>
+    </script> --}}
 @endpush

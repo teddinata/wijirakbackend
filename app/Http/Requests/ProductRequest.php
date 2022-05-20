@@ -24,11 +24,17 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
+            'categories_id' => 'required|integer|exists:categories,id',
             'name' => 'required|max:255',
             'type' => 'required|max:255',
+            'tags' => 'required|max:255',
+            'weight' => 'required|integer',
+            'sku' => 'required|max:255',
             'description' => 'required',
             'price' => 'required|integer',
-            'quantity' => 'required|integer'
+            'quantity' => 'required|integer',
+            'slug' => [ 'required', 'alpha_dash',
+                        'unique:products']
         ];
     }
 }

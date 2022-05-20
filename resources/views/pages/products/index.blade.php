@@ -18,6 +18,7 @@
                                 <thead>
                                     <tr>
                                         <th>id</th>
+                                        <th>Kategori</th>
                                         <th>Name</th>
                                         <th>Type</th>
                                         <th>Price</th>
@@ -29,6 +30,7 @@
                                    @forelse ($items as $item)
                                    <tr>
                                     <td>{{$item->id}}</td>
+                                    <td>{{ $item->categories_id }}</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->type}}</td>
                                     <td>{{$item->price}}</td>
@@ -41,7 +43,7 @@
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                     <form action="{{ route ('products.destroy', $item->id)}}" method="post" class="d-inline">
-                                        @csrf    
+                                        @csrf
                                         @method('delete')
                                             <button class="btn btn-danger btn-sm">
                                                 <i class="fa fa-trash"></i>

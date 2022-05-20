@@ -7,6 +7,14 @@
                 <a href="{{ route('dashboard')}}"><i class
                         ="menu-icon fa fa-laptop"></i>Dashboard </a>
                 </li>
+                {{-- Category --}}
+                <li class="menu-title">Category</li><!-- /.menu-title -->
+                <li class="">
+                    <a href="{{ route('category.index')}}"> <i class="menu-icon fa fa-list"></i>Data Kategori</a>
+                </li>
+                <li class="">
+                    <a href="{{ route ('category.create')}}"> <i class="menu-icon fa fa-plus"></i>Tambah Kategori</a>
+                </li>
                 <li class="menu-title">Barang</li><!-- /.menu-title -->
                 <li class="">
                     <a href="{{ route('products.index')}}"> <i class="menu-icon fa fa-list"></i>Lihat Barang</a>

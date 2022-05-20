@@ -20,6 +20,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    protected $maxAttempts = 3; // default is 5
 
     /**
      * Where to redirect users after login.

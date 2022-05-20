@@ -10,15 +10,21 @@ class Transaction extends Model
     use softDeletes;
 
     protected $fillable = [
-        'uuid', 'name', 'email', 'number', 'address', 'transaction_total', 'transaction_status'
-     ];
- 
-     protected $hidden = [
- 
+        'users_id', 'penerima', 'phone', 'province', 'city', 'address',
+        'shipping_notes', 'postcode', 'quantity', 'total_price', 'status', 'code'
      ];
 
-     public function details()
-     {
-         return $this->hasMany(TransactionDetail::class, 'transactions_id');
-     }
+     protected $hidden = [
+
+     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id', 'id');
+    }
+
+    // public function details()
+    // {
+    //     return $this->hasMany(TransactionDetail::class, 'transactions_id');
+    // }
 }

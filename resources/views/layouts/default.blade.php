@@ -29,11 +29,11 @@
         <!-- /.content -->
         <div class="clearfix"></div>
     </div>
-  
+
 
    {{-- Script --}}
-   @stack('before-script')
+   @push('before-script')
    @include('includes.script')
-   @stack('after-script')
+   @push('after-script')
 </body>
 </html>
