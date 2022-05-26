@@ -12,9 +12,9 @@ use App\Models\Transaction;
 use App\Models\TransactionDetail;
 
 use App\Http\Requests\CheckoutRequest;
-
+use Exception;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
@@ -29,57 +29,64 @@ class CheckoutController extends Controller
 
     }
 
-    public function process(CheckoutRequest $request, $id)
+    public function process(CheckoutRequest $request)
     {
-        $data = $request->all();
+        $validated = $request->validated();
 
-        // dd($data);
+        try {
+            DB::transaction(function () use ($validated) {
+                $cartItems = Cart::with(['product'])
+                    ->where('users_id', Auth::id())
+                    ->get();
 
-        $cart = Cart::with(['product'])
-                ->where('users_id', auth()->user()->id)->get();
+                $totalPrice = $cartItems->sum(function ($item) {
+                    return $item->quantity * $item->product->price;
+                });
 
-        // Add to Transaction data
-        $data['users_id'] = Auth::user()->id;
-        $data['total_price'] = $cart->sum('product.price');
-        $data['travel_transactions_id'] = $id;
+                $ppn = 0.11 * $totalPrice;
+                $totalPrice += $ppn;
 
-        $code = 'STORE-' . mt_rand(000,999);
+                // Add to Transaction data
+                $transaction  = Transaction::create([
+                    'users_id' => Auth::id(),
+                    'penerima' => $validated['penerima'],
+                    'phone' => $validated['phone'],
+                    'province' => $validated['province'],
+                    'city' => $validated['city'],
+                    'address' => $validated['address'],
+                    'shipping_notes' => $validated['shipping_notes'] ?? null,
+                    'postcode' => $validated['postcode'],
+                    'total_price' => $totalPrice,
+                    'status' => 'PENDING',
+                    'code' => 'STORE-' . mt_rand(000,999),
+                ]);
 
-        //  Transaction Create
-        // $transaction = Transaction::create($data);
-        $transaction  = Transaction::create([
-            'users_id' => Auth::user()->id,
-            'total_price' => $cart->product->price  * $cart['quantity'],
-            'status' => 'PENDING',
-            'code' => $code,
-        ]);
+                // create transaction details
+                foreach ($cartItems as $item) {
+                    $trx = 'INV-' . mt_rand(000,999);
 
-        // create transaction details
-        foreach ($cart as $cart) {
-            $trx = 'INV-' . mt_rand(000,999);
-            $items[] = TransactionDetail::create([
-                'transactions_id' => $transaction->id,
-                'users_id' => $cart->users_id,
-                'products_id' => $cart->products_id,
-                'code' => $trx
-        ]);
+                    TransactionDetail::create([
+                        'transactions_id' => $transaction->id,
+                        'users_id' => Auth::id(),
+                        'products_id' => $item->products_id,
+                        'code' => $trx
+                    ]);
+                }
+
+                //Delete cart Data
+                Cart::where('users_id', Auth::id())->delete();
+            });
+        } catch (Exception $e) {
+            throw $e;
         }
 
-        //Delete cart Data
-        Cart::where('users_id', Auth::user()->id)->delete();
-
-        // save transaction
-        $transaction->save();
-        dd($transaction);
-
-        return redirect()->route('success', $id);
-
+        return redirect()->route('success');
     }
 
-    public function success(Request $request, $id)
+    public function success(Request $request)
     {
-        $transaction = Transaction::findOrfail($id);
-        $transaction->save();
+        // $transaction = Transaction::findOrfail($id);
+        // $transaction->save();
         return view('pages.frontend.success');
     }
 }

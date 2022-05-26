@@ -34,7 +34,7 @@ class CheckoutRequest extends FormRequest
             'city' => 'required|string|max:255',
             'province' => 'required|string|max:255',
             'postcode' => 'required|string|max:255',
-            'shipping_notes' => 'required|string|max:255',
+            'shipping_notes' => 'nullable|string|max:255',
         ];
     }
 }
