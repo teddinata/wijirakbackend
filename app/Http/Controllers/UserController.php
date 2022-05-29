@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -19,9 +21,23 @@ class UserController extends Controller
         //data user model by id
         $user = Auth::user();
 
+        // transaction count
+        $transaction = Transaction::where('users_id', $user->id)->count();
+
+        // show transaction
+        $transaction_detail = TransactionDetail::with(['transaction.user', 'product.galleries'])
+                ->where('users_id', $user->id)->get();
+
+        // count transactions sum price
+        $total = Transaction::with(['transaction.user', 'product.galleries'])
+                ->where('users_id', $user->id)->sum('total_price');
+
         // profile
         return view('pages.frontend.profile', [
             'user' => $user,
+            'transaction' => $transaction,
+            'transaction_detail' => $transaction_detail,
+            'total' => $total,
         ]);
     }
 

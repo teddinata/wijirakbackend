@@ -10,8 +10,7 @@ class Transaction extends Model
     use softDeletes;
 
     protected $fillable = [
-        'users_id', 'penerima', 'phone', 'province', 'city', 'address',
-        'shipping_notes', 'postcode', 'quantity', 'total_price', 'status', 'code'
+        'users_id', 'total_price', 'status', 'code'
      ];
 
      protected $hidden = [

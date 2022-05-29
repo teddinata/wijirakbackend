@@ -53,7 +53,7 @@ Wiji Rak - Checkout
 
                         <div class="col-lg-6 mb-2">
                             <label for="penerima">Nama Penerima<span>*</span></label>
-                            <input type="text" id="penerima" name="penerima" value="{{ old('penerima') }}" class="form-control mb-0 @error('penerima') is-invalid @enderror">
+                            <input type="text" id="penerima" name="penerima" value="{{ old('penerima') ? old('penerima') : Auth::user()->penerima ?? '' }}" class="form-control mb-0 @error('penerima') is-invalid @enderror">
                             @error('penerima')'
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -69,7 +69,7 @@ Wiji Rak - Checkout
 
                         <div class="col-lg-6 mb-2">
                             <label for="phone">Nomor HP<span>*</span></label>
-                            <input type="text" id="phone" name="phone" value="{{ old('phone') }}" class="form-control mb-0 @error('phone') is-invalid @enderror">
+                            <input type="text" id="phone" name="phone" value="{{ old('phone') ? old('phone') : Auth::user()->phone ?? '' }}" class="form-control mb-0 @error('phone') is-invalid @enderror">
                             @error('phone')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror

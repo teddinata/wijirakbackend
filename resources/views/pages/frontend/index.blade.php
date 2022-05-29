@@ -69,7 +69,7 @@ Wiji Rak
         <div class="row">
             <div class="col-lg-3">
                 <div class="product-large set-bg" data-setbg="{{ url('frontend/img/products/women-large.jpg') }}">
-                    <h2>{{ $pilihan->name }}</h2>
+                    {{-- <h2>{{ $pilihan->name }}</h2> --}}
                     <a href="#">Discover More</a>
                 </div>
             </div>

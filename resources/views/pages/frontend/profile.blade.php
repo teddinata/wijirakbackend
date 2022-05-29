@@ -27,7 +27,7 @@
                 class="rounded-circle img-fluid" style="width: 150px;">
               <h5 class="my-3">{{ $user->first_name }} {{ $user->last_name }}</h5>
               <p class="text-muted mb-1">@ {{ $user->username }}</p>
-              <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+              <p class="text-muted mb-4">{{ $user->address }}</p>
               <div class="d-flex justify-content-center mb-2">
                 <button type="button" class="btn btn-primary">Edit Profile</button>
               </div>
@@ -36,17 +36,7 @@
             </div>
             </div>
           </div>
-          <div class="card mb-4 mb-lg-0">
-            <div class="card-body p-0">
-              <ul class="list-group list-group-flush rounded-3">
-                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                  <p class="mb-0"><b>10</b> Total Jumlah Pembelian</p>
-                </li>
 
-              </ul>
-            </div>
-          </div>
         </div>
         <div class="col-lg-8">
           <div class="card mb-4">
@@ -56,7 +46,7 @@
                   <p class="mb-0">Full Name</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">Johnatan Smith</p>
+                  <p class="text-muted mb-0">{{ $user->first_name }} {{ $user->last_name }}</p>
                 </div>
               </div>
               <hr>
@@ -65,7 +55,7 @@
                   <p class="mb-0">Email</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">example@example.com</p>
+                  <p class="text-muted mb-0">{{ $user->email }}</p>
                 </div>
               </div>
               <hr>
@@ -74,16 +64,16 @@
                   <p class="mb-0">Phone</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">(097) 234-5678</p>
+                  <p class="text-muted mb-0">{{ $user->phone }}</p>
                 </div>
               </div>
               <hr>
               <div class="row">
                 <div class="col-sm-3">
-                  <p class="mb-0">Mobile</p>
+                  <p class="mb-0">Province, City</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">(098) 765-4321</p>
+                  <p class="text-muted mb-0">{{ $user->province }}, {{ $user->city }}</p>
                 </div>
               </div>
               <hr>
@@ -92,48 +82,77 @@
                   <p class="mb-0">Address</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                  <p class="text-muted mb-0">{{ $user->address }}</p>
                 </div>
               </div>
+                <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Postcode</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ $user->postcode }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Username</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ $user->username }}</p>
+                </div>
+              </div>
+              <hr>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-primary font-italic me-1">Riwayat Pembelian</span>
-                  </p>
-                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                  <div class="progress rounded mb-2" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card mb-4 mb-md-0">
+            <div class="card-body">
+                      <ul class="list-group list-group-flush rounded-3">
+                        <li class="list-group-item d-flex  align-items-center p-3 justify-content-between">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"><b> {{ $transaction }}</b> Total Jumlah Pembelian</i>
+                            <i class="fa fa-dollar" aria-hidden="true"> Kamu sudah melakukan pembelian sebesar <b> {{ 'Rp' . number_format($total ?? 0, 0, ".", ".")  }}</b></i>
+                        </li>
+
+                      </ul>
+              <div class="row mt-3 mb-3">
+                  <div class="col-md-2">Photo</div>
+                  <div class="col-md-3 align-items-center">Produk / Kode Pembelian</div>
+                  <div class="col-md-4">Waktu Pembelian</div>
+                  <div class="col-md-3">Total Pembelian</div>
+              </div>
+              @foreach ($transaction_detail as $item)
+              {{-- <p class="mb-1" style="font-size: .77rem;">{{ $item->product->name }}</p> --}}
+              <div class="row mt-2">
+                <div class="col-md-2 mb-4">
+                <img
+                    src="{{ url($item->product->galleries->first()->photo ?? '') }}"
+                   class="w-75"
+                />
+                </div>
+                <div class="col-md-3">
+                    {{$item->product->name ?? ''}} <br />
+                   <strong>({{ $item->transaction->code }}) </strong>
+                </div>
+                <div class="col-md-4">
+                    {{$item->created_at ?? ''}}
+                </div>
+                <div class="col-md-3">
+                    {{ 'Rp' . number_format($item->transaction->total_price ?? 0, 0, ".", "." ) }}
+                </div>
+
+            </div>
+              @endforeach
+
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
