@@ -18,7 +18,7 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                {{-- <div class="stat-text">Rp. <span class="count">{{ $income }}</span></div> --}}
+                                <div class="stat-text">Rp. <span class="count">{{ $income }}</span></div>
                                 <div class="stat-heading">Penghasilan</div>
                             </div>
                         </div>
@@ -73,21 +73,21 @@
                               @forelse ($items as $item)
                                 <tr>
                                   <td>{{ $item->id }}</td>
-                                  <td>{{ $item->name }}</td>
-                                  <td>{{ $item->email }}</td>
-                                  <td>{{ $item->number }}</td>
+                                  <td>{{ $item->transaction->user->first_name }}</td>
+                                  <td>{{ $item->transaction->user->email }}</td>
+                                  <td>{{ $item->transaction->user->phone }}</td>
                                   <td></td>
                                   <td>
-                                    {{-- @if($item->transaction_status == 'PENDING')
+                                    @if($item->transaction->status == 'PENDING')
                                       <span class="badge badge-info">
-                                    @elseif($item->transaction_status == 'SUCCESS')
+                                    @elseif($item->transaction->status == 'SUCCESS')
                                       <span class="badge badge-success">
-                                    @elseif($item->transaction_status == 'FAILED')
+                                    @elseif($item->transaction->status == 'FAILED')
                                       <span class="badge badge-warning">
                                     @else
                                       <span>
                                     @endif
-                                      {{ $item->transaction_status }} --}}
+                                      {{ $item->transaction->status }}
                                       </span>
                                   </td>
                                 </tr>
@@ -318,5 +318,5 @@
             });
             // Bar Chart #flotBarChart End
         });
-    </script> --}}
+    </script>
 @endpush

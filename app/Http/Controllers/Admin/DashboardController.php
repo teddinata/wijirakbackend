@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -21,20 +22,21 @@ class DashboardController extends Controller
 
     public function index()
     {
-        // $income = Transaction::where('transaction_status', 'SUCCESS')->sum('transaction_total');
+        $income = Transaction::where('status', 'SUCCESS')->sum('total_price');
         $sales = Transaction::count();
-        $items = Transaction::orderBy('id', 'DESC')->take(5)->get();
-        // $pie = [
-        //     'pending' => Transaction::where('transaction_status', 'PENDING')->count(),
-        //     'failed' => Transaction::where('transaction_status', 'FAILED')->count(),
-        //     'success' => Transaction::where('transaction_status', 'SUCCESS')->count()
-        // ];
+        $items = TransactionDetail::with('transaction.user','product')
+                ->orderBy('id', 'DESC')->take(5)->get();
+        $pie = [
+            'pending' => Transaction::where('status', 'PENDING')->count(),
+            'failed' => Transaction::where('status', 'FAILED')->count(),
+            'success' => Transaction::where('status', 'SUCCESS')->count()
+        ];
 
         return view ('pages.admin.dashboard')->with([
-            // 'income' => $income,
+            'income' => $income,
             'sales' => $sales,
             'items' => $items,
-            // 'pie' => $pie
+            'pie' => $pie
         ]);
     }
 }

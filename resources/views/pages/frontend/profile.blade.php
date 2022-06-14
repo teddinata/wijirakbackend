@@ -122,9 +122,11 @@
                       </ul>
               <div class="row mt-3 mb-3">
                   <div class="col-md-2">Photo</div>
-                  <div class="col-md-3 align-items-center">Produk / Kode Pembelian</div>
-                  <div class="col-md-4">Waktu Pembelian</div>
-                  <div class="col-md-3">Total Pembelian</div>
+                  <div class="col-md-2 align-items-center">Produk / Kode Pembelian</div>
+                  <div class="col-md-3">Waktu Pembelian</div>
+                  <div class="col-md-2">Total Pembelian</div>
+                  <div class="col-md-2">Status</div>
+
               </div>
               @foreach ($transaction_detail as $item)
               {{-- <p class="mb-1" style="font-size: .77rem;">{{ $item->product->name }}</p> --}}
@@ -135,20 +137,21 @@
                    class="w-75"
                 />
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     {{$item->product->name ?? ''}} <br />
                    <strong>({{ $item->transaction->code }}) </strong>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     {{$item->created_at ?? ''}}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     {{ 'Rp' . number_format($item->transaction->total_price ?? 0, 0, ".", "." ) }}
                 </div>
-
+                <div class="col-md-2">
+                    {{ $item->transaction->status }}
+              </div>
             </div>
               @endforeach
-
             </div>
           </div>
         </div>
