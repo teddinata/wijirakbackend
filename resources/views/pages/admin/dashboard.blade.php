@@ -318,5 +318,5 @@
             });
             // Bar Chart #flotBarChart End
         });
-    </script>
+    </script> --}}
 @endpush
