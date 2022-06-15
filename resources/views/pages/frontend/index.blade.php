@@ -24,7 +24,7 @@ Wiji Rak
                 </div>
             </div>
         </div>
-        <div class="single-hero-items set-bg" data-setbg="{{ url('frontend/img/hero-2.jpg') }}">
+        {{-- <div class="single-hero-items set-bg" data-setbg="{{ url('frontend/img/hero-2.jpg') }}">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5">
@@ -39,7 +39,7 @@ Wiji Rak
                     <h2>Sale <span>50%</span></h2>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </section>
 <!-- Hero Section End -->
@@ -69,7 +69,7 @@ Wiji Rak
         <div class="row">
             <div class="col-lg-3">
                 <div class="product-large set-bg" data-setbg="{{ url('frontend/img/products/women-large.jpg') }}">
-                    <h2>{{ $pilihan->name }}</h2>
+                    {{-- <h2>{{ $pilihan->name }}</h2> --}}
                     <a href="#">Discover More</a>
                 </div>
             </div>

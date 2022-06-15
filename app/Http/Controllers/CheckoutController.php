@@ -32,9 +32,16 @@ class CheckoutController extends Controller
     public function process(CheckoutRequest $request)
     {
         $validated = $request->validated();
+         // Save user data
+         $user = Auth::user();
+         $user->update($request->except('total_price'));
 
         try {
             DB::transaction(function () use ($validated) {
+                 // Save user data
+                // $user = Auth::user();
+                // $user->update($request->except('total_price'));
+
                 $cartItems = Cart::with(['product'])
                     ->where('users_id', Auth::id())
                     ->get();
@@ -48,17 +55,18 @@ class CheckoutController extends Controller
 
                 // Add to Transaction data
                 $transaction  = Transaction::create([
-                    'users_id' => Auth::id(),
-                    'penerima' => $validated['penerima'],
-                    'phone' => $validated['phone'],
-                    'province' => $validated['province'],
-                    'city' => $validated['city'],
-                    'address' => $validated['address'],
-                    'shipping_notes' => $validated['shipping_notes'] ?? null,
-                    'postcode' => $validated['postcode'],
+                    'users_id' => Auth::user()->id,
+                    // 'users_id' => Auth::id(),
+                    // 'penerima' => $validated['penerima'],
+                    // 'phone' => $validated['phone'],
+                    // 'province' => $validated['province'],
+                    // 'city' => $validated['city'],
+                    // 'address' => $validated['address'],
+                    // 'shipping_notes' => $validated['shipping_notes'] ?? null,
+                    // 'postcode' => $validated['postcode'],
                     'total_price' => $totalPrice,
                     'status' => 'PENDING',
-                    'code' => 'STORE-' . mt_rand(000,999),
+                    'code' => 'WIJIRAK-' . mt_rand(000,999),
                 ]);
 
                 // create transaction details

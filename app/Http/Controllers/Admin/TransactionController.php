@@ -26,11 +26,34 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $items = Transaction::all();
+        //data user model by id
+        // $user = Auth::user();
 
-        return view('pages.transactions.index')->with([
-            'items' =>$items
+        // transaction count
+        $transaction = Transaction::all()->count();
+
+        // show transaction
+        $transaction_detail = TransactionDetail::with(['transaction.user',
+                'product.galleries'])->get();
+        // dd($transaction_detail);
+
+        // count transactions sum price
+        $total = Transaction::with(['transaction.user', 'product.galleries'])
+                ->sum('total_price');
+
+        // profile
+        return view('pages.transactions.index', [
+            // 'user' => $user,
+            'transaction' => $transaction,
+            'transaction_detail' => $transaction_detail,
+            'total' => $total,
         ]);
+
+        // $items = Transaction::all();
+
+        // return view('pages.transactions.index')->with([
+        //     'items' =>$items
+        // ]);
     }
 
     /**
@@ -62,9 +85,11 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        $item = Transaction::with('details.product')->findOrFail($id);
+        $item = TransactionDetail::with(['transaction.user','product.galleries'])
+            ->findOrFail($id);
+            // dd($item->product);
 
-        return view ('pages.transactions.show')->with([
+        return view ('pages.transactions.show', [
             'item' => $item
         ]);
     }
@@ -123,7 +148,8 @@ class TransactionController extends Controller
         ]);
 
         $item = Transaction::findOrFail($id);
-        $item->transaction_status = $request->status;
+        // dd($item);
+        $item->status = $request->status;
 
         $item->save();
 

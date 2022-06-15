@@ -18,13 +18,13 @@ class CreateTransactionsTable extends Migration
 
             $table->bigInteger('users_id');
 
-            $table->string('penerima')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('province')->nullable();
-            $table->string('city')->nullable();
-            $table->string('address')->nullable();
-            $table->string('shipping_notes')->nullable();
-            $table->string('postcode')->nullable();
+            // $table->string('penerima')->nullable();
+            // $table->string('phone')->nullable();
+            // $table->string('province')->nullable();
+            // $table->string('city')->nullable();
+            // $table->string('address')->nullable();
+            // $table->string('shipping_notes')->nullable();
+            // $table->string('postcode')->nullable();
 
             $table->integer('quantity')->nullable();
             $table->bigInteger('total_price')->default(0);

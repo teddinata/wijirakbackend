@@ -26,6 +26,9 @@ Route::get('detail/{slug}', 'DetailProductController@index')->name('products.det
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    // user profile
+    Route::get('profile', 'UserController@index')->name('profile');
+
     Route::get('cart', 'CartController@cart')->name('cart');
     // Route::get('cart', 'CartController@cartHeader')->name('cartHeader');
     Route::post('cart/{id}', 'CartController@cartAdd')->name('cart.add');

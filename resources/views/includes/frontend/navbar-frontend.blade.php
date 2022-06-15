@@ -21,7 +21,7 @@
                 <form action="{{ url('logout') }}" method="post" >
                         {{ csrf_field() }}
                         <button type="submit" class="login-panel btn" ><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</button>
-                        <a  class="login-panel btn" ><i class="fa fa-user"></i>Hi, {{ Auth::user()->first_name }} <span class="caret"></span></a></i></form>
+                        <a href="{{ route('profile') }}"  class="login-panel btn" ><i class="fa fa-user"></i>Hi, {{ Auth::user()->first_name }} <span class="caret"></span></a></i></form>
                 @endauth
             </div>
         </div>
@@ -97,7 +97,7 @@
     <div class="nav-item">
         <div class="container">
 
-            <nav class="nav-menu mobile-menu">
+            {{-- <nav class="nav-menu mobile-menu">
                 <ul>
                     <li class="active"><a href="./index.html">Home</a></li>
                     <li><a href="./shop.html">Shop</a></li>
@@ -106,7 +106,7 @@
                     <li><a href="./contact.html">Contact</a></li>
 
                 </ul>
-            </nav>
+            </nav> --}}
             <div id="mobile-menu-wrap"></div>
         </div>
     </div>

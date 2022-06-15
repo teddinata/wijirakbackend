@@ -1,27 +1,27 @@
 <table class="table table-bordered">
     <tr>
       <th>Nama</th>
-      <td>{{ $item->name }}</td>
+      <td>{{ $item->transaction->user->first_name }}</td>
     </tr>
     <tr>
       <th>Email</th>
-      <td>{{ $item->email }}</td>
+      <td>{{ $item->transaction->user->email }}</td>
     </tr>
     <tr>
       <th>Nomor</th>
-      <td>{{ $item->number }}</td>
+      <td>{{ $item->transaction->user->phone }}</td>
     </tr>
     <tr>
       <th>Alamat</th>
-      <td>{{ $item->address }}</td>
+      <td>{{ $item->transaction->user->address }}</td>
     </tr>
     <tr>
       <th>Total Transaksi</th>
-      <td>{{ $item->transaction_total }}</td>
+      <td> {{ 'Rp ' . number_format($item->transaction->total_price ?? 0, 0, ".", "." ) }}</td>
     </tr>
     <tr>
       <th>Status Transaksi</th>
-      <td>{{ $item->transaction_status }}</td>
+      <td>{{ $item->transaction->status }}</td>
     </tr>
     <tr>
       <th>Pembelian Produk</th>
@@ -32,13 +32,14 @@
             <th>Tipe</th>
             <th>Harga</th>
           </tr>
-          @foreach ($item->details as $detail)
+          {{-- {{ dd($item->product) }} --}}
+          {{-- @foreach ($item as $item) --}}
               <tr>
-                <td>{{ $detail->product->name }}</td>
-                <td>{{ $detail->product->type }}</td>
-                <td>${{ $detail->product->price }}</td>
+                <td>{{ $item->product->name }}</td>
+                <td>{{ $item->product->type }}</td>
+                <td> {{ 'Rp' . number_format($item->transaction->total_price ?? 0, 0, ".", "." ) }}</td>
               </tr>
-          @endforeach
+          {{-- @endforeach --}}
         </table>
       </td>
     </tr>
@@ -50,13 +51,13 @@
         </a>
         </div>
         <div class="col-4">
-        <a href="{{ route('transactions.status', $item->id) }}?status=FAILED" class="btn btn-warning btn-block">
+        <a href="{{ route('transactions.status', $item->id) }}?status=FAILED" class="btn btn-danger btn-block">
             <i class="fa fa-times"></i> Set Gagal
         </a>
         </div>
         <div class="col-4">
-        <a href="{{ route('transactions.status', $item->id) }}?status=PENDING" class="btn btn-info btn-block">
+        <a href="{{ route('transactions.status', $item->id) }}?status=PENDING" class="btn btn-warning btn-block">
             <i class="fa fa-spinner"></i> Set Pending
         </a>
         </div>
-    </div> 
+    </div>

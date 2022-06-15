@@ -27,20 +27,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   @forelse ($items as $item)
+                                   @forelse ($transaction_detail as $item)
                                    <tr>
                                     <td>{{$item->id}}</td>
-                                    <td>{{$item->name}}</td>
-                                    <td>{{$item->email}}</td>
-                                    <td>{{$item->number}}</td>
-                                    <td>Rp{{$item->transaction_total}}</td>
+                                    <td>{{$item->product->name}}</td>
+                                    <td>{{$item->transaction->user->email}}</td>
+                                    <td>{{$item->transaction->user->phone}}</td>
+                                    <td> {{ 'Rp ' . number_format($item->transaction->total_price ?? 0, 0, ".", "." ) }}</td>
                                     <td>
-                                        @if($item->transaction_status == 'PENDING')
-                                            <span class="badge badge-info">
-                                        @elseif($item->transaction_status == 'SUCCESS')
-                                            <span class="badge badge-success">
-                                        @elseif($item->transaction_status == 'FAILED')
-                                            <span class="badge badge-danger">
+                                        @if($item->transaction->status == 'PENDING')
+                                            <span class="badge badge-warning">PENDING</span>
+                                        @elseif($item->transaction->status == 'SUCCESS')
+                                            <span class="badge badge-success">SUCCESS</span>
+                                        @elseif($item->transaction->status == 'FAILED')
+                                            <span class="badge badge-danger">FAILED</span>
                                         @else
                                             <span>
                                         @endif
@@ -49,21 +49,21 @@
                                     </td>
                                     <td>
                                     @if($item->transaction_status == 'PENDING')
-                                 <a href="{{route('transactions.status', $item->id)}}?status=SUCCESS" 
+                                 <a href="{{route('transactions.status', $item->id)}}?status=SUCCESS"
                                         class="btn btn-success btn-sm">
                                         <i class="fa fa-check"></i>
                                     </a>
-                                    <a href="{{route('transactions.status', $item->id)}}?status=FAILED" 
+                                    <a href="{{route('transactions.status', $item->id)}}?status=FAILED"
                                         class="btn btn-warning btn-sm">
                                         <i class="fa fa-times"></i>
-                                    </a> 
+                                    </a>
                                     @endif
 
                                     <a href="#mymodal"
                                         data-remote="{{route('transactions.show', $item->id)}}"
                                         data-toggle="modal"
                                         data-target="#mymodal"
-                                        data-title="Detail Transaksi {{ $item->uuid }}"
+                                        data-title="Detail Transaksi <strong> {{ $item->transaction->code }}</strong> "
                                         class="btn btn-primary btn-sm">
                                         <i class="fa fa-eye"></i>
                                     </a>
@@ -71,7 +71,7 @@
                                             <i class="fa fa-pencil"></i>
                                         </a>
                                     <form action="{{ route ('transactions.destroy', $item->id)}}" method="post" class="d-inline">
-                                        @csrf    
+                                        @csrf
                                         @method('delete')
                                             <button class="btn btn-danger btn-sm">
                                                 <i class="fa fa-trash"></i>
