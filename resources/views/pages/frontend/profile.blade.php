@@ -123,10 +123,9 @@
               <div class="row mt-3 mb-3">
                   <div class="col-md-2">Photo</div>
                   <div class="col-md-2 align-items-center">Produk / Kode Pembelian</div>
-                  <div class="col-md-3">Waktu Pembelian</div>
-                  <div class="col-md-2">Total Pembelian</div>
+                  <div class="col-md-3">Waktu Pembelian /<br> Total Pembelian</div>
                   <div class="col-md-2">Status</div>
-
+                  <div class="col-md-2">Aksi</div>
               </div>
               @foreach ($transaction_detail as $item)
               {{-- <p class="mb-1" style="font-size: .77rem;">{{ $item->product->name }}</p> --}}
@@ -142,13 +141,22 @@
                    <strong>({{ $item->transaction->code }}) </strong>
                 </div>
                 <div class="col-md-3">
-                    {{$item->created_at ?? ''}}
+                    {{$item->created_at ?? ''}} /<br><strong> {{ 'Rp' . number_format($item->transaction->total_price ?? 0, 0, ".", "." ) }}</strong>
                 </div>
                 <div class="col-md-2">
-                    {{ 'Rp' . number_format($item->transaction->total_price ?? 0, 0, ".", "." ) }}
+                    @if($item->transaction->status == 'PENDING')
+                        <span class="badge badge-warning">PENDING</span>
+                    @elseif($item->transaction->status == 'SUCCESS')
+                        <span class="badge badge-success">SUCCESS</span>
+                    @elseif($item->transaction->status == 'FAILED')
+                        <span class="badge badge-danger">FAILED</span>
+                    @else
+                        <span>
+                    @endif
+                    {{$item->transaction_status}}
                 </div>
                 <div class="col-md-2">
-                    {{ $item->transaction->status }}
+                    <a href="{{ route('bukti-bayar', $item->id) }}" class="btn btn-primary">Bayar</a>
               </div>
             </div>
               @endforeach

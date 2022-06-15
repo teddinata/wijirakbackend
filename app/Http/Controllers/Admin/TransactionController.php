@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
+use App\Models\Payments;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -24,7 +25,7 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //data user model by id
         // $user = Auth::user();
@@ -40,6 +41,9 @@ class TransactionController extends Controller
         // count transactions sum price
         $total = Transaction::with(['transaction.user', 'product.galleries'])
                 ->sum('total_price');
+        // $payment = Payments::all();
+        $data = Payments::where('transactions_id', $request->id)->get();
+
 
         // profile
         return view('pages.transactions.index', [
@@ -47,6 +51,8 @@ class TransactionController extends Controller
             'transaction' => $transaction,
             'transaction_detail' => $transaction_detail,
             'total' => $total,
+            'data' => $data,
+            // 'payment' => $payment,
         ]);
 
         // $items = Transaction::all();

@@ -29,6 +29,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // user profile
     Route::get('profile', 'UserController@index')->name('profile');
 
+    // bukti bayar
+    Route::get('/transaksi/bukti-bayar/{id}', 'UserController@buktiBayar')->name('bukti-bayar');
+    // store bukti Bayar
+    Route::post('/transaksi/bukti-bayar/{id}', 'UserController@storeBuktiBayar')->name('store-bukti-bayar');
+
     Route::get('cart', 'CartController@cart')->name('cart');
     // Route::get('cart', 'CartController@cartHeader')->name('cartHeader');
     Route::post('cart/{id}', 'CartController@cartAdd')->name('cart.add');
@@ -49,6 +54,10 @@ Route::prefix('admin')
         ->group(function() {
 
         Route::get('/', 'DashboardController@index')->name('dashboard');
+
+        // route for pembayaran
+        Route::get('/pembayaran/{id}', 'PaymentController@index')->name('pembayaran');
+        // Route::get('/pembayaran', 'PaymentController@index')->name('pembayaran');
 
 
         // Route::get('/login', 'Admin\AdminController@login')->name('admin.login');

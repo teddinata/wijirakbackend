@@ -23,6 +23,7 @@
     @include('includes.frontend.navbar-frontend')
 
     @yield('content')
+    @include('sweetalert::alert')
 
     @include('includes.frontend.footer-frontend')
 
