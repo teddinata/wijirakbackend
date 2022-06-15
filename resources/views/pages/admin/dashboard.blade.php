@@ -76,7 +76,7 @@
                                   <td>{{ $item->transaction->user->first_name }}</td>
                                   <td>{{ $item->transaction->user->email }}</td>
                                   <td>{{ $item->transaction->user->phone }}</td>
-                                  <td></td>
+                                  <td>{{ $item->transaction->total_price }}</td>
                                   <td>
                                     @if($item->transaction->status == 'PENDING')
                                       <span class="badge badge-info">

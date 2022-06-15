@@ -59,6 +59,9 @@
                                     </a>
                                     @endif
 
+                                    <a href="{{ route('pembayaran', $item->id) }}" class="btn btn-info btn-sm">
+                                        <i class="fa fa-upload"></i>
+                                    </a>
                                     <a href="#mymodal"
                                         data-remote="{{route('transactions.show', $item->id)}}"
                                         data-toggle="modal"
