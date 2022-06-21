@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Payments;
+use App\Models\Transaction;
+use App\Models\TransactionDetail;
 
 class PaymentController extends Controller
 {
@@ -16,6 +18,7 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
+       
         // show pembayaran by id
         $data = Payments::where('transactions_id', $request->id)->get();
         // $data = Payments::where('transactions_id', $id)->get();
@@ -23,6 +26,8 @@ class PaymentController extends Controller
 
         return view('pages.pembayaran.index', [
             'data' => $data,
+            
+
         ]);
     }
 
