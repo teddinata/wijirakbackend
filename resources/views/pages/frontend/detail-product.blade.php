@@ -26,15 +26,15 @@ Wiji Rak - Produk
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <div class="filter-widget">
+                {{-- <div class="filter-widget">
                     <h4 class="fw-title">Categories</h4>
                     <ul class="filter-catagories">
-                        <li><a href="#">Men</a></li>
-                        <li><a href="#">Women</a></li>
-                        <li><a href="#">Kids</a></li>
+                        @foreach ($categories as $category)
+                        <li><a href="{{ route('products.detail', $category->slug) }}">{{ $category->name }}</a></li>
+                        @endforeach
                     </ul>
-                </div>
-                <div class="filter-widget">
+                </div> --}}
+                {{-- <div class="filter-widget">
                     <h4 class="fw-title">Brand</h4>
                     <div class="fw-brand-check">
                         <div class="bc-item">
@@ -134,17 +134,11 @@ Wiji Rak - Produk
                             <label for="xs-size">xs</label>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="filter-widget">
                     <h4 class="fw-title">Tags</h4>
                     <div class="fw-tags">
-                        <a href="#">Towel</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Coat</a>
-                        <a href="#">Dresses</a>
-                        <a href="#">Trousers</a>
-                        <a href="#">Men's hats</a>
-                        <a href="#">Backpack</a>
+                        <a href="#">{{ $products->sku }}</a>
                     </div>
                 </div>
             </div>
@@ -188,7 +182,7 @@ Wiji Rak - Produk
                                 <p>{!! $products->description !!}</p>
                                 <h4>{{'Rp ' . number_format($products->price, 0, ".", ".")}} <span>629.99</span></h4>
                             </div>
-                            <div class="pd-color">
+                            {{-- <div class="pd-color">
                                 <h6>Color</h6>
                                 <div class="pd-color-choose">
                                     <div class="cc-item">
@@ -204,8 +198,8 @@ Wiji Rak - Produk
                                         <label for="cc-violet" class="cc-violet"></label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="pd-size-choose">
+                            </div> --}}
+                            {{-- <div class="pd-size-choose">
                                 <div class="sc-item">
                                     <input type="radio" id="sm-size">
                                     <label for="sm-size">s</label>
@@ -222,7 +216,7 @@ Wiji Rak - Produk
                                     <input type="radio" id="xl-size">
                                     <label for="xl-size">xs</label>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="quantity">
                                 <div class="pro-qty">
                                     <input type="text" value="1">
