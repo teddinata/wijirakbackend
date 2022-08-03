@@ -49,14 +49,14 @@
                         <li class="cart-icon">
                             <a href="#">
                                 <i class="icon_bag_alt"></i>
-                                <span>3</span>
+                                {{-- <span>3</span> --}}
                             </a>
                             <div class="cart-hover">
                                 <div class="select-items">
                                     <table>
                                         <tbody>
 
-                                            <tr>
+                                            {{-- <tr>
                                                 <td class="si-pic"><img src="{{ url('frontend/img/select-product-1.jpg') }}" alt=""></td>
                                                 <td class="si-text">
                                                     <div class="product-selected">
@@ -67,28 +67,28 @@
                                                 <td class="si-close">
                                                     <i class="ti-close"></i>
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
 
-                                            <p id="cart-empty" class="text-center py-8">
-                                                Oooopsss.... Cart is Empty!
+                                            {{-- <p id="cart-empty" class="text-center py-8">
+                                                Oooopsss.... Cart is Emptyss!
                                                 <a href="{{ route('home') }}"></a>
-                                            </p>
+                                            </p> --}}
 
 
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="select-total">
+                                {{-- <div class="select-total">
                                     <span>total:</span>
                                     <h5>$120.00</h5>
-                                </div>
+                                </div> --}}
                                 <div class="select-button">
-                                    <a href="#" class="primary-btn view-card">VIEW CARD</a>
-                                    <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
+                                    <a href="{{ route('cart') }}" class="primary-btn view-card">VIEW CARD</a>
+                                    <a href="{{ route('cart') }}" class="primary-btn checkout-btn">CHECK OUT</a>
                                 </div>
                             </div>
                         </li>
-                        <li class="cart-price">$150.00</li>
+                        {{-- <li class="cart-price">$150.00</li> --}}
                     </ul>
                 </div>
             </div>

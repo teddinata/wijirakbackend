@@ -35,7 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/transaksi/bukti-bayar/{id}', 'UserController@storeBuktiBayar')->name('store-bukti-bayar');
 
     Route::get('cart', 'CartController@cart')->name('cart');
-    // Route::get('cart', 'CartController@cartHeader')->name('cartHeader');
+    Route::get('cart2', 'CartController@cartHeader')->name('cartHeader');
     Route::post('cart/{id}', 'CartController@cartAdd')->name('cart.add');
     Route::post('updatecart/{id}', 'CartController@decrementCart')->name('cart.decrement');
     // Route::patch('/update_cart', 'CartController@update_cart')->name('update_cart');
