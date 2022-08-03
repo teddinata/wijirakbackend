@@ -5,7 +5,7 @@
             <div class="ht-left">
                 <div class="mail-service">
                     <i class=" fa fa-envelope"></i>
-                    hello.colorlib@gmail.com
+                    wijirak@gmail.com
                 </div>
                 <div class="phone-service">
                     <i class=" fa fa-phone"></i>
@@ -32,7 +32,7 @@
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
                         <a href="./index.html">
-                            <img src="{{ url('frontend/img/logo.png') }}" alt="">
+                            <img src="{{ url('frontend/img/logowj.png') }}" alt="">
                         </a>
                     </div>
                 </div>

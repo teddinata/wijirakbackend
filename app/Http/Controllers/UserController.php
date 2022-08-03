@@ -47,10 +47,15 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $transaction = Transaction::findOrfail($id);
+        $nota = TransactionDetail::with(['transaction.user',
+        'product.galleries'])->where('transactions_id', $id)->where('users_id',$user->id)->get();
+        
 
         return view('pages.frontend.bukti-bayar', [
             'id' => $id,
             'transaction' => $transaction,
+            'nota' => $nota,
+            
         ]);
         // return view('pages.frontend.bukti-bayar');
     }

@@ -149,7 +149,7 @@ Wiji Rak - Cart
                                 <li class="cart-total">Total <span>Rp {{ number_format($total, 0, ".", ".") }}</span></li>
                             </ul>
 
-                                <a href="{{ route('checkout') }}" type="submit" class="proceed-btn">PROCEED TO CHECK OUT</a >
+                                <a href="{{ route('checkout') }}" type="submit" class="proceed-btn">CHECK OUT</a >
 
                         </div>
                     </div>

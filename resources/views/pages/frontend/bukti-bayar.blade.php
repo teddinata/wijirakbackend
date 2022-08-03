@@ -91,9 +91,9 @@
                                     <li class="fw-normal">BCA<span>90000 321 312 321</span></li>
                                     <li class="fw-normal">BNI <span>90000 987 987 987</span></li>
                                     <li class="fw-normal">Gopay <span>085 515 123 123</span></li>
-                                    <li class="total-price">TOTAL BELANJA <span>Rp 240.000.000</span></li>
+                                    <li class="total-price">TOTAL BELANJA <span>{{'Rp ' . number_format($transaction->total_price, 0, ".", ".")}}</span></li>
                                     <li class="total-price">+ Kode Unik <span>123</span></li>
-                                    <li class="total-price">TOTAL TRANSFER <span>Rp 240.000.123</span></li>
+                                    <li class="total-price">TOTAL TRANSFER <span>{{'Rp ' . number_format($transaction->total_price, 0, ".", ".")}}</span></li>
                                 </ul>
                                 <div class="mt-2 mb-4">
                                    <H6><strong>* HARAP TRANSFER SESUAI JUMLAH UNTUK MEMPERCEPAT PROSES VALIDASI</strong></H6>
